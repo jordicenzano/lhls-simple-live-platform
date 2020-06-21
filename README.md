@@ -1,7 +1,7 @@
 # lhls-simple-live-platform
-This readme shows how to build a very simple live streaming platform based on open source tools with a glass to glass latency below 2s.
+This readme shows how to build a very simple live streaming platform based on open source tools with a glass to glass latency around 2s.
 
-To learn more about it see the prestation at syd\<video\> on 2020/06/24:
+To learn more about it see the presentation at syd\<video\> on 2020/06/24:
 - Slides (TODO)
 - Video (TODO)
 
@@ -62,6 +62,4 @@ cd ~/go/src/github.com/mjneil/go-chunked-streaming-server/scripts
 - This is JUST A PROOF OF CONCEPT / PROTOTYPE do not use it in production
     - Example of known problem: If the encoder reconnect for any reason, the live stream finishes
 - There is a lot going on about how to do ABR when you are sending data at "media speed" and NOT at "cable speed". So for multirendtion and chunk transfer you should expect regular players going to the lower BW lane
-- We [go-chunked-streaming-server](https://github.com/mjneil/go-chunked-streaming-server) does not send `max-age` headers, so if you want to add a CDN on top of this prototype you need tp set up the expiration manually.
-    - Example for Fastly distro configuration I set a fallback TTL = 1s
-        - Fastly distro: `livedemo.jordicenzano.name`
+- We [go-chunked-streaming-server](https://github.com/mjneil/go-chunked-streaming-server) does not send `max-age` headers, so if you want to add a CDN on top of this prototype you need tp set up the expiration manually
