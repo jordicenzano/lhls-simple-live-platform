@@ -6,7 +6,7 @@ To learn more about it see the presentation at syd\<video\> on 2020/06/24:
 - Video (TODO)
 
 ## Block diagram
-![Block diagram](./pics/bd-full.png)
+![Block diagram](./pics/bd-full-no-cdn.png)
 
 ## Installation
 - Launch EC2
