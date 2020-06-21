@@ -1,8 +1,12 @@
 # lhls-simple-live-platform
 This readme shows how to build a very simple live streaming platform based on open source tools with a glass to glass latency below 2s.
 
+To learn more about it see the prestation at syd\<video\> on 2020/06/24:
+- Slides (TODO)
+- Video (TODO)
+
 ## Block diagram
-TODO pic
+![Block diagram](./pics/bd-full.png)
 
 ## Installation
 - Launch EC2
@@ -50,8 +54,9 @@ cd ~/go/src/github.com/mjneil/go-chunked-streaming-server/scripts
 - Open your favorite HLS player: [Safari](https://www.apple.com/safari/), [Quicktime](https://support.apple.com/en-us/HT201066), [VideoJS](https://videojs.com/), [ffplay](https://ffmpeg.org/ffplay.html), etc
     - Use this URL: `http://[PUBLIC-IP-EC2]:9094/mrrtmp/playlist.m3u8`
         
-- Example glass to glass latency with this set up: **XXXms**
-TODO PICTURE
+- Example glass to glass latency with this set up: **2.01s**
+![Glass to glass latency](./pics/lat-lhls.jpeg)
+
 
 ## Notes
 - This is JUST A PROOF OF CONCEPT / PROTOTYPE do not use it in production
