@@ -44,7 +44,7 @@ cd ~/go/src/github.com/mjneil/go-chunked-streaming-server
 ```
 - Create ANOTHER shell to the EC2 machine (`tmux` recommended), start RTMP server + segmenter with a multirendion transcoding configuration
 ```
-cd ~/go/src/github.com/mjneil/go-chunked-streaming-server/scripts
+cd ~/go/src/github.com/jordicenzano/go-ts-segmenter/scripts/
 ./transcoding-multirendition-rtmp.sh live
 ```
 - Open your favorite RTMP client: [OBS](https://obsproject.com/), [Wirecast](https://www.telestream.net/wirecast/overview.htm), [Elemental](https://aws.amazon.com/elemental-live/), [Wowza Clearcaster](https://www.wowza.com/products/clearcaster),  [ffmpeg](https://ffmpeg.org/), etc
