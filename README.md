@@ -3,7 +3,7 @@ This readme shows how to build a very simple live streaming platform based on op
 
 To learn more about it see the presentation at syd\<video\> on 2020/06/24:
 - Slides (TODO)
-- Video (TODO)
+- [Demo Video](https://youtu.be/rTaL-9XL03g)
 
 ## Block diagram
 ![Block diagram](./pics/bd-full-no-cdn.png)
