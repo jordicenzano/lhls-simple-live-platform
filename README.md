@@ -2,7 +2,7 @@
 This readme shows how to build a very simple live streaming platform based on open source tools with a glass to glass latency around 2s.
 
 To learn more about it see the presentation at syd\<video\> on 2020/06/24:
-- Slides (TODO)
+- [Slides](https://slides.com/jordicenzano/deck-973aed)
 - [Demo Video](https://youtu.be/rTaL-9XL03g)
 
 ## Block diagram
