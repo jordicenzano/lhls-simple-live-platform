@@ -51,7 +51,7 @@ cd ~/go/src/github.com/jordicenzano/go-ts-segmenter/scripts/
     - Configure the RTMP URL as: `rtmp://[PUBLIC-IP-EC2]:1935/live/stream`
     - Recommended short GOP (1s) and (if possible) activate "zerolatency" video encoding mode
     - Start streaming
-- Open your favorite HLS player: [Safari](https://www.apple.com/safari/), [Quicktime](https://support.apple.com/en-us/HT201066), [VideoJS](https://videojs.com/), [ffplay](https://ffmpeg.org/ffplay.html), etc
+- Tested with following players: [Safari](https://www.apple.com/safari/), and [Quicktime](https://support.apple.com/en-us/HT201066) (there is a known problem with [ffplay](https://ffmpeg.org/ffplay.html))
     - Use this URL: `http://[PUBLIC-IP-EC2]:9094/mrrtmp/playlist.m3u8`
         
 - Example glass to glass latency with this set up: **2.01s**
