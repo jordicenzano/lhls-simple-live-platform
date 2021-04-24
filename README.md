@@ -16,6 +16,7 @@ To learn more about it see the presentation at syd\<video\> on 2020/06/24:
     - Security groups
         - Open Inbound 1935 for everybody
         - Open Inbound 9094 for everybody
+- Update the machine `sudo yum update -y`
 - Install git: `sudo yum install git -y`
 - (optional) Install tmux: `sudo yum install tmux -y`
 - Install (compile) ffmpeg
@@ -25,29 +26,24 @@ To learn more about it see the presentation at syd\<video\> on 2020/06/24:
 - From your home dir `cd ~` install and compile [go-ts-segmenter](https://github.com/jordicenzano/go-ts-segmenter)
 ```
 go get github.com/jordicenzano/go-ts-segmenter
-cd ~/go/src/github.com/jordicenzano/go-ts-segmenter
-go get
-make
 ```
 - From your home dir `cd ~` install and compile [go-chunked-streaming-server](https://github.com/mjneil/go-chunked-streaming-server)
 ```
 go get github.com/mjneil/go-chunked-streaming-server
-cd ~/go/src/github.com/mjneil/go-chunked-streaming-server
-make
 ```
 
-## Usage
+## Usage (RTMP source)
 - Create a shell to the EC2 machine (`tmux` recommended), and start webserver in HTTPS
 ```
-cd ~/go/src/github.com/mjneil/go-chunked-streaming-server
-./bin/go-chunked-streaming-server
+cd ~/go/bin/
+./go-chunked-streaming-server
 ```
 - Create ANOTHER shell to the EC2 machine (`tmux` recommended), start RTMP server + segmenter with a multirendion transcoding configuration
 ```
 cd ~/go/src/github.com/jordicenzano/go-ts-segmenter/scripts/
 ./transcoding-multirendition-rtmp.sh live
 ```
-- Open your favorite RTMP client: [OBS](https://obsproject.com/), [Wirecast](https://www.telestream.net/wirecast/overview.htm), [Elemental](https://aws.amazon.com/elemental-live/), [Wowza Clearcaster](https://www.wowza.com/products/clearcaster),  [ffmpeg](https://ffmpeg.org/), etc
+- Open your favorite RTMP client: [OBS](https://obsproject.com/), [Wirecast](https://www.telestream.net/wirecast/overview.htm), [Elemental](https://aws.amazon.com/elemental-live/), [Wowza Clearcaster](https://www.wowza.com/products/clearcaster), [ffmpeg](https://ffmpeg.org/), etc
     - Configure the RTMP URL as: `rtmp://[PUBLIC-IP-EC2]:1935/live/stream`
     - Recommended short GOP (1s) and (if possible) activate "zerolatency" video encoding mode
     - Start streaming
@@ -57,6 +53,26 @@ cd ~/go/src/github.com/jordicenzano/go-ts-segmenter/scripts/
 - Example glass to glass latency with this set up: **2.01s**
 ![Glass to glass latency](./pics/lat-lhls.jpeg)
 
+## Usage (SRT source)
+- Create a shell to the EC2 machine (`tmux` recommended), and start webserver in HTTPS
+```
+cd ~/go/src/github.com/mjneil/go-chunked-streaming-server
+./bin/go-chunked-streaming-server
+```
+- Create ANOTHER shell to the EC2 machine (`tmux` recommended), start SRT server + segmenter with a multirendion transcoding configuration
+```
+cd ~/go/src/github.com/jordicenzano/go-ts-segmenter/scripts/
+./transcoding-multirendition-rtmp.sh live
+```
+- Open your favorite SRT client: [OBS](https://obsproject.com/), [Wowza Clearcaster](https://www.wowza.com/products/clearcaster), [ffmpeg](https://ffmpeg.org/), etc
+    - Configure the SRT URL as: TODO `rtmp://[PUBLIC-IP-EC2]:1935/live/stream`
+    - Recommended short GOP (1s) and (if possible) activate "zerolatency" video encoding mode
+    - Start streaming
+- Tested with following players: [Safari](https://www.apple.com/safari/), [Quicktime](https://support.apple.com/en-us/HT201066) and [ffplay](https://ffmpeg.org/ffplay.html))
+    - Use this URL: `http://[PUBLIC-IP-EC2]:9094/mrrtmp/playlist.m3u8`
+        
+- Example glass to glass latency with this set up: TODO **2.01s**
+![Glass to glass latency](./pics/lat-lhls.jpeg)
 
 ## Notes
 - This is JUST A PROOF OF CONCEPT / PROTOTYPE do not use it in production
