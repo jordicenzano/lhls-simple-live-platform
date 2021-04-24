@@ -23,10 +23,10 @@ STREAM_NAME_480p="480p"
 BASE_DIR="../results/${PATH_NAME}"
 LOGS_DIR="../logs"
 GO_BINARY_DIR="~/go/bin"
-TS_SEGMENTER_BIN="$GO_BINARY_DIR/go-ts-segmenter"
+TS_SEGMENTER_BIN= `realpath $GO_BINARY_DIR/go-ts-segmenter`
 
 # Check segmenter binary
-if [ ! -f `realpath $TS_SEGMENTER_BIN` ]; then
+if [ ! -f $TS_SEGMENTER_BIN ]; then
     echo "$TS_SEGMENTER_BIN does not exist."
     exit 1
 fi
