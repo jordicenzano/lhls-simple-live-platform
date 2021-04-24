@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
 
 if [ $# -lt 1 ]; then
-	echo "Use ./transcoding-multirendition-rtmp.sh test/live [RTMPPort] [RTMPApp] [RTMPStream] [HLSOutHostPort]"
-    echo "test/live: In test generates test signal"
-    echo "RTMPPort: RTMP local port (default: 1935)"
-    echo "RTMPPort: RTMP app name (default: \"live\")"
-    echo "RTMPPort: RTMP stream name (default: \"stream\")"
+	echo "Use ./transcoding-multirendition-srt.sh test/live [SRTPort] [HLSOutHostPort]"
+    echo "test/live: In test generated a test signal"
+    echo "SRTPort: SRT listener local UDP port (default: 1935)"
     echo "HLSOutHostPort: Host and to send HLS data (default: \"localhost:9094\")"
-    echo "Example: ./transcoding-multirendition-rtmp.sh live 1935 \"live\" \"stream\" \"localhost:9094\""
+    echo "Example: ./transcoding-multirendition-srt.sh live 1935 \"stream\" \"localhost:9094\""
     exit 1
 fi
 
 MODE="${1}"
-RTMP_PORT="${2:-"1935"}"
-RTMP_APP="${3:-"live"}"
-RTMP_STREAM="${4:-"stream"}"
-HOST_DST="${5:-"localhost:9094"}"
+SRT_PORT="${2:-"1935"}"
+HOST_DST="${3:-"localhost:9094"}"
 
-PATH_NAME="mrrtmp"
+PATH_NAME="mrsrt"
 STREAM_NAME_720p="720p"
 STREAM_NAME_480p="480p"
 BASE_DIR="../results/${PATH_NAME}"
@@ -87,9 +83,9 @@ if [[ "$MODE" == "test" ]]; then
     -c:a aac -b:a 48k \
     -f mpegts "$BASE_DIR/$FIFO_FILENAME_480p"
 else
-    # Start multilane transcoder from RTMP to TS
+    # Start multilane transcoder from SRT to TS
     ffmpeg -hide_banner -y \
-    -listen 1 -i "rtmp://0.0.0.0:$RTMP_PORT/$RTMP_APP/$RTMP_STREAM" \
+    -i "srt://0.0.0.0:$SRT_PORT?mode=listener" \
     -s 1280x720 -vf "drawtext=fontfile=$FONT_PATH:text=\'RENDITION 720p - Local time %{localtime\: %Y\/%m\/%d %H.%M.%S} (%{n})\':x=10:y=350:fontsize=30:fontcolor=pink:box=1:boxcolor=0x00000099" \
     -c:v libx264 -tune zerolatency -b:v 6000k -g 30 -preset ultrafast \
     -c:a aac -b:a 48k \

@@ -14,8 +14,9 @@ To learn more about it see the presentation at syd\<video\> on 2020/06/24:
         - t2.small (for transmuxing)
         - t2.xlarge (for transcoding from 720p to 720p and 480p)
     - Security groups
-        - Open Inbound 1935 for everybody
-        - Open Inbound 9094 for everybody
+        - Open Inbound TCP 1935 for everybody (RTMP)
+        - - Open Inbound UDP 1935 for everybody (SRT)
+        - Open Inbound 9094 for everybody (HTTP)
 - Update the machine `sudo yum update -y`
 - Install git: `sudo yum install git -y`
 - (optional) Install tmux: `sudo yum install tmux -y`
@@ -60,23 +61,23 @@ cd ~/lhls-simple-live-platform/scripts/
 
 ## Usage (SRT source)
 - Create a shell to the EC2 machine (`tmux` recommended), and start webserver in HTTPS
-```
-cd ~/go/src/github.com/mjneil/go-chunked-streaming-server
-./bin/go-chunked-streaming-server
+```bash
+cd ~/go/bin/
+./go-chunked-streaming-server
 ```
 - Create ANOTHER shell to the EC2 machine (`tmux` recommended), start SRT server + segmenter with a multirendion transcoding configuration
-```
-cd ~/go/src/github.com/jordicenzano/go-ts-segmenter/scripts/
-./transcoding-multirendition-rtmp.sh live
+```bash
+cd ~/lhls-simple-live-platform/scripts/
+./transcoding-multirendition-srt.sh live
 ```
 - Open your favorite SRT client: [OBS](https://obsproject.com/), [Wowza Clearcaster](https://www.wowza.com/products/clearcaster), [ffmpeg](https://ffmpeg.org/), etc
-    - Configure the SRT URL as: TODO `rtmp://[PUBLIC-IP-EC2]:1935/live/stream`
+    - Configure the SRT URL as: `srt://[PUBLIC-IP-EC2]:1935`
     - Recommended short GOP (1s) and (if possible) activate "zerolatency" video encoding mode
     - Start streaming
 - Tested with following players: [Safari](https://www.apple.com/safari/), [Quicktime](https://support.apple.com/en-us/HT201066) and [ffplay](https://ffmpeg.org/ffplay.html))
-    - Use this URL: `http://[PUBLIC-IP-EC2]:9094/mrrtmp/playlist.m3u8`
+    - Use this URL: `http://[PUBLIC-IP-EC2]:9094/mrsrt/playlist.m3u8`
         
-- Example glass to glass latency with this set up: TODO **2.01s**
+- Example glass to glass latency with this set up: **2.01s**
 ![Glass to glass latency](./pics/lat-lhls.jpeg)
 
 ## Notes
