@@ -26,7 +26,7 @@ GO_BINARY_DIR="~/go/bin"
 TS_SEGMENTER_BIN="$GO_BINARY_DIR/go-ts-segmenter"
 
 # Check segmenter binary
-if [ ! -f $TS_SEGMENTER_BIN ]; then
+if [ ! -f `realpath $TS_SEGMENTER_BIN` ]; then
     echo "$TS_SEGMENTER_BIN does not exist."
     exit 1
 fi
@@ -34,6 +34,7 @@ fi
 # Clean up
 echo "Restarting ${BASE_DIR} directory"
 rm -rf $BASE_DIR/*
+mkdir -p $BASE_DIR
 mkdir -p $LOGS_DIR
 
 # Create master playlist (this should be created after 1st chunk is uploaded)

@@ -22,25 +22,30 @@ To learn more about it see the presentation at syd\<video\> on 2020/06/24:
 - Install (compile) ffmpeg
     - You can use this [script](https://github.com/jordicenzano/ffmpeg-compile-centos-amazon-linux) or [source code](https://trac.ffmpeg.org/wiki/CompilationGuide)
 - Install DejaVu fonts (to do the overlay on transcoding): `sudo yum install dejavu-sans-fonts -y`
+- Install this repo
+```bash
+cd ~
+git clone https://github.com/jordicenzano/lhls-simple-live-platform.git
+```
 - Install GO, see [instructions](https://golang.org/doc/install)
 - From your home dir `cd ~` install and compile [go-ts-segmenter](https://github.com/jordicenzano/go-ts-segmenter)
-```
+```bash
 go get github.com/jordicenzano/go-ts-segmenter
 ```
 - From your home dir `cd ~` install and compile [go-chunked-streaming-server](https://github.com/mjneil/go-chunked-streaming-server)
-```
+```bash
 go get github.com/mjneil/go-chunked-streaming-server
 ```
 
 ## Usage (RTMP source)
 - Create a shell to the EC2 machine (`tmux` recommended), and start webserver in HTTPS
-```
+```bash
 cd ~/go/bin/
 ./go-chunked-streaming-server
 ```
 - Create ANOTHER shell to the EC2 machine (`tmux` recommended), start RTMP server + segmenter with a multirendion transcoding configuration
-```
-cd ~/go/src/github.com/jordicenzano/go-ts-segmenter/scripts/
+```bash
+cd ~/lhls-simple-live-platform/scripts/
 ./transcoding-multirendition-rtmp.sh live
 ```
 - Open your favorite RTMP client: [OBS](https://obsproject.com/), [Wirecast](https://www.telestream.net/wirecast/overview.htm), [Elemental](https://aws.amazon.com/elemental-live/), [Wowza Clearcaster](https://www.wowza.com/products/clearcaster), [ffmpeg](https://ffmpeg.org/), etc
