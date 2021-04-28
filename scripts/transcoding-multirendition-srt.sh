@@ -85,7 +85,7 @@ if [[ "$MODE" == "test" ]]; then
 else
     # Start multilane transcoder from SRT to TS
     ffmpeg -hide_banner -y \
-    -i "srt://0.0.0.0:$SRT_PORT?mode=listener" \
+    -i "srt://0.0.0.0:$SRT_PORT?mode=listener&latency=120000" \
     -s 1280x720 -vf "drawtext=fontfile=$FONT_PATH:text=\'RENDITION 720p - Local time %{localtime\: %Y\/%m\/%d %H.%M.%S} (%{n})\':x=10:y=350:fontsize=30:fontcolor=pink:box=1:boxcolor=0x00000099" \
     -c:v libx264 -tune zerolatency -b:v 6000k -g 30 -preset ultrafast \
     -c:a aac -b:a 48k \
