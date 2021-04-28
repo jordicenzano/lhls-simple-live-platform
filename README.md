@@ -77,8 +77,8 @@ cd ~/lhls-simple-live-platform/scripts/
 - Tested with following players: [Safari](https://www.apple.com/safari/), [Quicktime](https://support.apple.com/en-us/HT201066) and [ffplay](https://ffmpeg.org/ffplay.html))
     - Use this URL: `http://[PUBLIC-IP-EC2]:9094/mrsrt/playlist.m3u8`
         
-- Example glass to glass latency with this set up: **2.01s**
-![Glass to glass latency](./pics/lat-lhls.jpeg)
+- Example glass to glass latency with this set up: **2.54s**
+![Glass to glass latency](./pics/lat-lhls-srt.jpeg)
 
 ## Notes
 - This is JUST A PROOF OF CONCEPT / PROTOTYPE do not use it in production
